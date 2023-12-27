@@ -17,3 +17,12 @@ export const checkAuthStatus = async () => {
         const data = await res.data;
         return data;
 };
+
+export const sendChatRequest = async (message:string) => {
+    const res = await axios.post("user/chat/new", {message});
+    if (res.status !== 201) {
+        throw new Error("Unable to send promp");
+    }
+        const data = await res.data;
+        return data;
+};

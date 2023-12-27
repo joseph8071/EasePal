@@ -8,7 +8,7 @@ const Header = () => {
   const auth = useAuth();
   return (
     <AppBar
-      sx={{ bgcolor: "transparent", position: "static", boxShadow: "none" }}
+      sx={{ bgcolor: "transparent", position: "static", boxShadow: "none"}}
     >
       <Toolbar sx={{ display: "flex" }}>
         <Logo />
@@ -18,7 +18,7 @@ const Header = () => {
               <NavLink
                 bg="#00fffc"
                 to="/chat"
-                text="Start Your Custom Routine"
+                text="Start Now"
                 textColor="black"
               />
               <NavLink
