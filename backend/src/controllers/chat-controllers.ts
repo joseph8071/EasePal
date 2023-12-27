@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/user.js";
 import { configureOpenAI } from "../config/openai-config.js";
-import OpenAI from "openai";
+import { OpenAIApi, ChatCompletionRequestMessage } from "openai";
 export const generateChatCompletion = async (
   req: Request,
   res: Response,
@@ -18,21 +18,19 @@ export const generateChatCompletion = async (
     const chats = user.chats.map(({ role, content }) => ({
       role,
       content,
-    })) as [];
+    })) as ChatCompletionRequestMessage[];
     chats.push({ content: message, role: "user" });
     user.chats.push({ content: message, role: "user" });
+
     // send all chats with new one to openAI API
-    const clientOptions = {
-        apiKey: process.env.OPEN_AI_SECRET,
-        organization: process.env.OPEN_AI_ORGANIZATION, // This is optional
-      };
-    const openai = new OpenAI(clientOptions);
+    const config = configureOpenAI();
+    const openai = new OpenAIApi(config);
     // get latest response
-    const chatResponse = await openai.chat.completions.create({
-        messages: chats,
-        model: "gpt-3.5-turbo",
+    const chatResponse = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: chats,
     });
-    user.chats.push(chatResponse.choices[0]);
+    user.chats.push(chatResponse.data.choices[0].message);
     await user.save();
     return res.status(200).json({ chats: user.chats });
   } catch (error) {
@@ -50,17 +48,22 @@ export const sendChatsToUser = async (
     //user token check
     const user = await User.findById(res.locals.jwtData.id);
     if (!user) {
-      return res.status(401).send("User not registered OR Token malfunctioned");
+      return res.status(401).send("User not registered or token malfunction");
     }
-    if (user._id.toString() !== res.locals.jwtData.id) {
-      return res.status(401).send("Permissions didn't match");
-    }
-    return res.status(200).json({ message: "OK", chats: user.chats });
+    console.log(user._id.toString(), res.locals.jwtData.id);
+    if(user._id.toString() !== res.locals.jwtData.id) {
+        return res.status(401).send("Permissions not granted");
+        }
+
+    return res
+      .status(201)
+      .json({ message: "OK", chats: user.chats});
   } catch (error) {
-    console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+    console.log("hello", error);
+    return res.status(500).json({ message: "Error", cause: error.message });
   }
 };
+
 
 export const deleteChats = async (
   req: Request,
@@ -79,9 +82,9 @@ export const deleteChats = async (
     //@ts-ignore
     user.chats = [];
     await user.save();
-    return res.status(200).json({ message: "OK" });
+    return res.status(201).json({ message: "OK" });
   } catch (error) {
     console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+    return res.status(500).json({ message: "ERROR", cause: error.message });
   }
 };

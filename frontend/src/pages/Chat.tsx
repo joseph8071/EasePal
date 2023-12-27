@@ -1,10 +1,17 @@
 import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import red from "@mui/material/colors/red";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
-import { sendChatRequest } from "../helpers/api-communicator";
+import {
+  deleteUserChats,
+  getUserChats,
+  sendChatRequest,
+} from "../helpers/api-communicator";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { blue } from "@mui/material/colors";
 
 type Message = {
   role: "user" | "assistant";
@@ -12,6 +19,7 @@ type Message = {
 };
 
 const Chat = () => {
+  const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const auth = useAuth();
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
@@ -20,12 +28,44 @@ const Chat = () => {
     if (inputRef && inputRef.current) {
       inputRef.current.value = "";
     }
-
     const newMessage: Message = { role: "user", content };
     setChatMessages((prev) => [...prev, newMessage]);
     const chatData = await sendChatRequest(content);
-    setChatMessages([...chatData.chats])
+    setChatMessages([...chatData.chats]);
+    //
   };
+  const handleDeleteChats = async () => {
+    try {
+      toast.loading("Deleting Chats", { id: "deletechats" });
+      await deleteUserChats();
+      setChatMessages([]);
+      toast.success("Successfully deleted chats", { id: "deletechats" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to delete chats", { id: "deletechats" });
+    }
+  };
+
+  useLayoutEffect(() => {
+    if (auth?.isLoggedIn && auth.user) {
+      toast.loading("Loading Chats", { id: "loadchats" });
+      getUserChats()
+        .then((data) => {
+          setChatMessages([...data.chats]);
+          toast.success("Successfully loaded chats", { id: "loadchats" });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Failed to load chats", { id: "loadchats" });
+        });
+    }
+  }, [auth]);
+  useEffect(() => {
+    if (!auth?.user) {
+      return navigate("/login");
+    }
+  }, [auth]);
+  
   return (
     <Box
       sx={{
@@ -64,17 +104,16 @@ const Chat = () => {
               fontWeight: 700,
             }}
           >
-            {auth?.user?.name[0]}
+            {auth?.user?.name[0].toUpperCase()}
           </Avatar>
-          <Typography sx={{ mx: "auto", fontFamily: "Helvetica Neue" }}>
-            You are talking to a bot
+          <Typography sx={{ mx: "auto", fontFamily: "Kanit", p: 3 }}>
+          <span style={{fontWeight:700, fontSize:'35px'}}>Welcome to EasePal!</span>
           </Typography>
-          <Typography
-            sx={{ mx: "auto", fontFamily: "Helvetica Neue", my: 4, p: 3 }}
-          >
-            Describe Your Mobility Goals and Challenges
+          <Typography sx={{ mx: "auto", fontFamily: "Kanit", p:3, fontSize:'23px' }}>
+           To create a personalized exercise and stretching routine just for you, we need some details. <br/><br/> Please answer the following questions as accurately as possible. 
           </Typography>
           <Button
+            onClick={handleDeleteChats}
             sx={{
               width: "200px",
               my: "auto",
@@ -102,13 +141,13 @@ const Chat = () => {
           sx={{
             textAlign: "center",
             fontSize: "40px",
-            color: "white",
+            color: "black",
             mb: 2,
             mx: "auto",
             fontWeight: 600,
           }}
         >
-          Personalized AI Mobility Coach
+          Personalized Mobility Coach
         </Typography>
         <Box
           sx={{
@@ -132,7 +171,6 @@ const Chat = () => {
         <div
           style={{
             width: "100%",
-            padding: "20px",
             borderRadius: 8,
             backgroundColor: "rgb(17,27,39)",
             display: "flex",
@@ -145,7 +183,7 @@ const Chat = () => {
             style={{
               width: "100%",
               backgroundColor: "transparent",
-              padding: "10px",
+              padding: "30px",
               border: "none",
               outline: "none",
               color: "white",
@@ -154,9 +192,23 @@ const Chat = () => {
           />
           <IconButton
             onClick={handleSubmit}
-            sx={{ ml: "auto", color: "white" }}
+            sx={{ ml: "auto", color: "white", mx: 1 }}
           >
-            <IoMdSend></IoMdSend>
+            <Button
+              sx={{
+                width: "200px",
+                my: "auto",
+                color: "white",
+                fontWeight: "700",
+                borderRadius: 3,
+                mx: "auto",
+                bgcolor: blue[800],
+                ":hover": { bgcolor: blue[600] },
+              }}
+            >
+              Create My Routine -  <IoMdSend></IoMdSend>
+            
+            </Button>
           </IconButton>
         </div>
       </Box>

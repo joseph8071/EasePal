@@ -16,29 +16,29 @@ const Header = () => {
           {auth?.isLoggedIn ? (
             <>
               <NavLink
-                bg="#00fffc"
+                bg="#1E70DD"
                 to="/chat"
-                text="Start Now"
-                textColor="black"
+                text="Create"
+                textColor="white"
               />
               <NavLink
-                bg="51538f"
+                bg="#223D66"
                 textColor="white"
                 to="/logout"
                 text="logout"
-                onClick={auth?.logout}
+                onClick={auth.logout}
               />
             </>
           ) : (
             <>
             <NavLink
-              bg="#00fffc"
+              bg="#1E70DD"
               to="/login"
               text="Login"
-              textColor="black"
+              textColor="white"
             />
             <NavLink
-              bg="51538f"
+              bg="#223D66"
               textColor="white"
               to="/signup"
               text="Signup"

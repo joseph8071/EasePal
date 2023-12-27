@@ -4,14 +4,14 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #0501c0;
+  background: #cce7ff;
   color: white;
   font-family: "Kanit", serif;
 }
 
-.image-inverted {
+/* .image-inverted {
   filter: invert(100%);
-}
+} */
 
 .nav-link {
   font-weight: 600;
@@ -28,3 +28,4 @@ body {
 .MuiOutlinedInput-notchedOutline{
   border-color: white !important;
 }
+
