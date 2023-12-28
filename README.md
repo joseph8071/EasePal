@@ -29,14 +29,15 @@ Create an Account: Sign up with your basic details.
 Fill Out the Form: Provide information about your fitness goals, areas of pain, and overall mobility.
 Receive Your Routine: Get a custom routine designed just for you.
 Follow Along: Use the provided videos and screenshots to correctly perform each exercise.
-Contributing
+
+# Contributing
 Contributions to improve EasePal are welcome. Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
 
 
 # ![ezgif com-video-to-gif-converter (2)](https://github.com/joseph8071/EasePal/assets/93278644/9b8a53d5-68c1-47dc-90b2-4029dba16179)
 
 # **Author**
-Joseph Alfartosy - Initial work
+Joseph Alfartosy
 
 # **License**
 This project is licensed under the MIT License - see the LICENSE.md file for details.
