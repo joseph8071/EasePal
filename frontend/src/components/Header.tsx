@@ -8,7 +8,7 @@ const Header = () => {
   const auth = useAuth();
   return (
     <AppBar
-      sx={{ bgcolor: "transparent", position: "static", boxShadow: "none"}}
+      sx={{ bgcolor: "transparent", position: "static", boxShadow: "none" }}
     >
       <Toolbar sx={{ display: "flex" }}>
         <Logo />
@@ -31,19 +31,19 @@ const Header = () => {
             </>
           ) : (
             <>
-            <NavLink
-              bg="#1E70DD"
-              to="/login"
-              text="Login"
-              textColor="white"
-            />
-            <NavLink
-              bg="#223D66"
-              textColor="white"
-              to="/signup"
-              text="Signup"
-            />
-          </>
+              <NavLink
+                bg="#1E70DD"
+                to="/login"
+                text="Login"
+                textColor="white"
+              />
+              <NavLink
+                bg="#223D66"
+                textColor="white"
+                to="/signup"
+                text="Signup"
+              />
+            </>
           )}
         </div>
       </Toolbar>

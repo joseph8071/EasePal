@@ -51,19 +51,16 @@ export const sendChatsToUser = async (
       return res.status(401).send("User not registered or token malfunction");
     }
     console.log(user._id.toString(), res.locals.jwtData.id);
-    if(user._id.toString() !== res.locals.jwtData.id) {
-        return res.status(401).send("Permissions not granted");
-        }
+    if (user._id.toString() !== res.locals.jwtData.id) {
+      return res.status(401).send("Permissions not granted");
+    }
 
-    return res
-      .status(201)
-      .json({ message: "OK", chats: user.chats});
+    return res.status(201).json({ message: "OK", chats: user.chats });
   } catch (error) {
     console.log("hello", error);
     return res.status(500).json({ message: "Error", cause: error.message });
   }
 };
-
 
 export const deleteChats = async (
   req: Request,

@@ -21,19 +21,28 @@ const Signup = () => {
       await auth?.signup(name, email, password);
       toast.success("Signed Up Successfully", { id: "signup" });
     } catch (error) {
-        console.log(error);
-        toast.error("Signup Failed", { id: "signup" });
+      console.log(error);
+      toast.error("Signup Failed", { id: "signup" });
     }
   };
   useEffect(() => {
-    if(auth?.user) {
-      return navigate('/chat')
+    if (auth?.user) {
+      return navigate("/chat");
     }
-  }, [auth])
+  }, [auth]);
   return (
     <Box width={"100%"} display="flex" flex={1} height={"100%"}>
       <Box padding={8} mt={8} display={{ md: "flex", sm: "1", xs: "none" }}>
-        <img src="robot.png" alt="robot" style={{maxWidth:'1200px', margin:'auto', width:'100%', height:'auto%'}} />
+        <img
+          src="robot.png"
+          alt="robot"
+          style={{
+            maxWidth: "1200px",
+            margin: "auto",
+            width: "100%",
+            height: "auto%",
+          }}
+        />
       </Box>
       <Box
         display={"flex"}

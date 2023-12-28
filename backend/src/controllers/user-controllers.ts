@@ -148,13 +148,12 @@ export const userLogout = async (
       return res.status(401).send("Permissions not granted");
     }
 
-
     res.clearCookie(COOKIE_NAME, {
-        httpOnly: true,
-        domain: "localhost",
-        signed: true,
-        path: "/",
-      });
+      httpOnly: true,
+      domain: "localhost",
+      signed: true,
+      path: "/",
+    });
 
     return res
       .status(201)

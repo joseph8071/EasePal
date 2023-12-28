@@ -12,8 +12,8 @@ const Footer = () => {
           marginTop: 50,
         }}
       >
-        <p style={{ textAlign: "center", fontSize: '20px', color:'black'}}>
-            Copyright ⓒ 2024 Joseph Alfartosy
+        <p style={{ textAlign: "center", fontSize: "20px", color: "black" }}>
+          Copyright ⓒ 2024 Joseph Alfartosy
         </p>
       </div>
     </footer>
