@@ -1,6 +1,7 @@
 # **Project Overview**
 EasePal is a dynamic web application designed to create personalized stretching routines tailored to individual needs. Whether you're dealing with specific muscle pain, seeking to improve your flexibility, or simply looking to enhance your overall wellness, EasePal is here to guide you. The application is deployed on GitHub Pages for ease of access and use.
-![ezgif com-video-to-gif-converter](https://github.com/joseph8071/EasePal/assets/93278644/1e6db9f4-57fa-4ed3-8c62-a3500102c1b3)
+
+# ![ezgif com-video-to-gif-converter](https://github.com/joseph8071/EasePal/assets/93278644/1e6db9f4-57fa-4ed3-8c62-a3500102c1b3)
 
 # **Key Features:**
 Personalization: Users receive a customized stretching routine based on their unique needs and goals.
@@ -9,13 +10,14 @@ Visual Guides: Includes videos and screenshots to demonstrate stretches and exer
 Account Creation: Users can make an account to track their progress and preferences.
 
 # **Built With**
-Frontend: React, TypeScript, Vite
-Backend: Node.js, Express.js
-Database: MongoDB, Mongoose
-Getting Started
+Frontend: **React, TypeScript, Vite**
+Backend: **Node.js, Express.js**
+Database: **MongoDB, Mongoose**
+
+# Getting Started
 To use EasePal, simply visit the Vercel deployment. Create an account to start receiving your personalized exercise routines!
 
-![ezgif com-video-to-gif-converter (1)](https://github.com/joseph8071/EasePal/assets/93278644/6b4ccd2a-5ecf-4c7f-8935-b1869635cded)
+# ![ezgif com-video-to-gif-converter (1)](https://github.com/joseph8071/EasePal/assets/93278644/6b4ccd2a-5ecf-4c7f-8935-b1869635cded)
 
 
 # **Prerequisites**
@@ -31,7 +33,7 @@ Contributing
 Contributions to improve EasePal are welcome. Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
 
 
-![ezgif com-video-to-gif-converter (2)](https://github.com/joseph8071/EasePal/assets/93278644/9b8a53d5-68c1-47dc-90b2-4029dba16179)
+# ![ezgif com-video-to-gif-converter (2)](https://github.com/joseph8071/EasePal/assets/93278644/9b8a53d5-68c1-47dc-90b2-4029dba16179)
 
 # **Author**
 Joseph Alfartosy - Initial work
