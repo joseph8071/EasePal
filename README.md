@@ -1,9 +1,9 @@
-# **Project Overview**
-EasePal is a dynamic web application designed to create personalized stretching routines tailored to individual needs. Whether you're dealing with specific muscle pain, seeking to improve your flexibility, or simply looking to enhance your overall wellness, EasePal is here to guide you. The application is deployed on Vercel(frontend) and AWS(backend) for ease of access and use.
+## **Project Overview**
+EasePal is a dynamic web application designed to create personalized stretching routines tailored to individual needs. Whether you're dealing with specific muscle pain, seeking to improve your flexibility, or simply looking to enhance your overall wellness, EasePal is here to guide you. The application is deployed on **Vercel (frontend**) and an **AWS EC2 instane (backend)** for ease of access and use.
 
-# ![ezgif com-video-to-gif-converter](https://github.com/joseph8071/EasePal/assets/93278644/1e6db9f4-57fa-4ed3-8c62-a3500102c1b3)
+## ![ezgif com-video-to-gif-converter](https://github.com/joseph8071/EasePal/assets/93278644/1e6db9f4-57fa-4ed3-8c62-a3500102c1b3)
 
-# **Key Features:**
+## **Key Features:**
 Personalization: Users receive a customized stretching routine based on their unique needs and goals.
 User-Friendly Interface: Simple and intuitive, making it easy for anyone to navigate and use.
 Visual Guides: Includes videos and screenshots to demonstrate stretches and exercises effectively.
