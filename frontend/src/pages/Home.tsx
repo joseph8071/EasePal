@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "@mui/material";
 import TypingAnimation from "../components/typer/TypingAnimation";
 import Footer from "../components/footer/Footer";

@@ -1,5 +1,4 @@
-import { Avatar, Box, Typography } from "@mui/material";
-import React from "react";
+import { Avatar, Box } from "@mui/material";
 import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -9,6 +8,7 @@ function extractCodeFromString(message: string) {
     return blocks;
   }
 }
+// @ts-ignore
 function isCodeBlock(str: string) {
   if (
     str.includes("=") ||
@@ -37,8 +37,9 @@ const ChatItem = ({
   if (messageBlocks) {
     const secondSnippet = messageBlocks[1];
     const firstLine = secondSnippet.split("\n")[0]; // Get the first line of the code snippet
+   // @ts-ignore
     const languageName = firstLine.trim().split(" ")[0]; // Extract the first word
-  }
+  }// @ts-ignore
   const auth = useAuth();
   return role === "assistant" ? (
     <Box

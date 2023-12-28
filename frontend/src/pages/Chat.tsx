@@ -1,16 +1,16 @@
-import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import red from "@mui/material/colors/red";
 import ChatItem from "../components/chat/ChatItem";
-import { IoMdSend } from "react-icons/io";
 import {
   deleteUserChats,
   getUserChats,
   sendChatRequest,
+  
 } from "../helpers/api-communicator";
 import { toast } from "react-hot-toast";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import StepForm from "../components/chat/StepForm";
 import FormContainer from "../components/chat/FormContainer";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -29,6 +29,7 @@ const Chat = () => {
   const [loadingMessage, setLoadingMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false); // New state for loading status
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900); // Example threshold
+  // @ts-ignore
   const handleSubmit = async () => {
     const content = inputRef.current?.value as string;
     if (inputRef && inputRef.current) {
@@ -41,7 +42,7 @@ const Chat = () => {
     setShowForm(false);
     //
   };
-
+// @ts-ignore
   const handleFormSubmit = async (finalString) => {
     // Handle the final string from the form
     // For example, send it using sendChatRequest
@@ -221,6 +222,7 @@ const Chat = () => {
               content={chat.content}
               role={chat.role}
               key={index}
+              // @ts-ignore
               overflow={"hidden"}
               scrollBehavior={"smooth"}
             />
