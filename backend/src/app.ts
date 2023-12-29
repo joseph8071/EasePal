@@ -8,7 +8,7 @@ config();
 const app = express();
 
 //middleware
-app.use(cors({ origin: "https://easepal.vercel.app", credentials: true }));
+app.use(cors({ origin: "http://easepal.vercel.app", credentials: true }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
