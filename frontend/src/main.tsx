@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
-axios.defaults.baseURL = "http://18.246.218.166:22";
+axios.defaults.baseURL = "http://18.246.218.166:3000";
 axios.defaults.withCredentials = true;
 const theme = createTheme({
   typography: { fontFamily: "Kanit, serif", allVariants: { color: "white" } },
