@@ -7,12 +7,5 @@
       { "src": "/(.*).(js|css|png|jpg|gif|svg|json|ico)$", "dest": "/$1.$2" },
       { "src": "/(.*).html", "dest": "/$1.html" },
       { "src": "/.*", "dest": "/index.html" }
-    ],
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
     ]
-    
   }
