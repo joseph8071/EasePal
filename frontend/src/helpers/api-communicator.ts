@@ -19,6 +19,7 @@ export const signupUser = async (
   if (res.status !== 201) {
     throw new Error("Unable to Signup");
   }
+  localStorage.setItem('token', res.data.token);
   const data = await res.data;
   return data;
 };
@@ -64,6 +65,8 @@ export const logoutUser = async () => {
   if (res.status !== 201) {
     throw new Error("Unable to logout");
   }
+  localStorage.removeItem('token');
+  delete axios.defaults.headers.common['Authorization'];
   const data = await res.data;
   return data;
 };
