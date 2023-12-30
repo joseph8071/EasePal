@@ -9,6 +9,11 @@ import { Toaster } from "react-hot-toast";
 import axios from "axios";
 axios.defaults.baseURL = "https://salty-cove-77775-dbd5a8290b5c.herokuapp.com/api/v1/";
 axios.defaults.withCredentials = true;
+const token = localStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+
 const theme = createTheme({
   typography: { fontFamily: "Kanit, serif", allVariants: { color: "white" } },
 });
