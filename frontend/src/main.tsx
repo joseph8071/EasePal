@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
-axios.defaults.baseURL = "https://18.246.218.166:3000/api/v1/";
+axios.defaults.baseURL = "https://salty-cove-77775-dbd5a8290b5c.herokuapp.com/api/v1/";
 axios.defaults.withCredentials = true;
 const theme = createTheme({
   typography: { fontFamily: "Kanit, serif", allVariants: { color: "white" } },
