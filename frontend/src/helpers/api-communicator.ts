@@ -66,7 +66,6 @@ export const logoutUser = async () => {
     throw new Error("Unable to logout");
   }
   localStorage.removeItem('token');
-  delete axios.defaults.headers.common['Authorization'];
   const data = await res.data;
   return data;
 };
