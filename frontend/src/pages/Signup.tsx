@@ -79,7 +79,7 @@ const Signup = () => {
             >
               Signup
             </Typography>
-            <CustomInput name="text" label="Name" type="name" />
+            <CustomInput name="text" label="Name" type="text" />
             <CustomInput name="email" label="Email" type="email" />
             <CustomInput name="password" label="Password" type="password" />
             <Button
