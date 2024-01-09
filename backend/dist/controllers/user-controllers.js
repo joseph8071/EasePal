@@ -30,6 +30,8 @@ export const userSignup = async (req, res, next) => {
             httpOnly: true,
             signed: true,
             path: "/",
+            secure: true,
+            sameSite: 'none'
         });
         const token = createToken(user._id.toString(), user.email, "7d");
         const expires = new Date();
@@ -39,10 +41,12 @@ export const userSignup = async (req, res, next) => {
             expires,
             httpOnly: true,
             signed: true,
+            secure: true,
+            sameSite: 'none'
         });
         return res
             .status(201)
-            .json({ message: "OK", name: user.name, email: user.email });
+            .json({ message: "OK", name: user.name, email: user.email, token });
     }
     catch (error) {
         console.log(error);
@@ -65,6 +69,8 @@ export const userLogin = async (req, res, next) => {
             httpOnly: true,
             signed: true,
             path: "/",
+            secure: true,
+            sameSite: 'none'
         });
         const token = createToken(user._id.toString(), user.email, "7d");
         console.log(token);
@@ -75,6 +81,8 @@ export const userLogin = async (req, res, next) => {
             expires,
             httpOnly: true,
             signed: true,
+            secure: true,
+            sameSite: 'none'
         });
         return res
             .status(201)
@@ -120,6 +128,8 @@ export const userLogout = async (req, res, next) => {
             httpOnly: true,
             signed: true,
             path: "/",
+            secure: true,
+            sameSite: 'none'
         });
         return res
             .status(201)
