@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
 import { useContext } from "react";
+import axios from "axios";
 import {
   checkAuthStatus,
   loginUser,
@@ -41,6 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (data) {
       setUser({ email: data.email, name: data.name });
       setIsLoggedIn(true);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`; // Update token on login
     }
   };
   const signup = async (name: string, email: string, password: string) => {
@@ -48,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (data) {
       setUser({ email: data.email, name: data.name });
       setIsLoggedIn(true);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`; // Update token on login
     }
   };
   const logout = async () => {
@@ -55,6 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsLoggedIn(false);
     setUser(null);
     window.location.reload();
+    delete axios.defaults.headers.common['Authorization']; // Remove token on logout
   };
 
   const value = {
