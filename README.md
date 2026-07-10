@@ -1,44 +1,90 @@
-# **Project Overview**
-EasePal is a dynamic web application designed to create personalized stretching routines tailored to individual needs. Whether you're dealing with specific muscle pain, seeking to improve your flexibility, or simply looking to enhance your overall wellness, EasePal is here to guide you. The application is deployed on GitHub Pages for ease of access and use.
+# EasePal
 
-# ![ezgif com-video-to-gif-converter](https://github.com/joseph8071/EasePal/assets/93278644/1e6db9f4-57fa-4ed3-8c62-a3500102c1b3)
+**A gentle mobility companion for recovery.**
 
-# **Key Features:**
-Personalization: Users receive a customized stretching routine based on their unique needs and goals.
-User-Friendly Interface: Simple and intuitive, making it easy for anyone to navigate and use.
-Visual Guides: Includes videos and screenshots to demonstrate stretches and exercises effectively.
-Account Creation: Users can make an account to track their progress and preferences.
+EasePal helps you build simple stretching routines, track your comfort, and
+approach movement with patience — so you always know what feels safe and where
+to begin. It is **not a medical tool**; it's a calm, supportive companion for the
+vulnerable stretch of time after an injury.
 
-# **Built With**
-Frontend: **React, TypeScript, Vite**
-Backend: **Node.js, Express.js**
-Database: **MongoDB, Mongoose**
+> EasePal started after a car accident left me temporarily limited in my
+> mobility. Recovery made me realize how frustrating it is to not know what
+> movement is safe, where to start, or how to stay consistent. So I built a
+> gentle companion that meets you at your comfort level and never pushes past it.
 
-# Getting Started
-To use EasePal, simply visit the Vercel deployment. Create an account to start receiving your personalized exercise routines!
+## What it does
 
-# ![ezgif com-video-to-gif-converter (1)](https://github.com/joseph8071/EasePal/assets/93278644/6b4ccd2a-5ecf-4c7f-8935-b1869635cded)
+- **Safety first** — a required safety screen before any routine, and a clear
+  “stop if…” cue on every movement. Any red flag caps the whole session at the
+  gentlest level.
+- **Guided, personalized flow** — a short, kind onboarding (area, goal,
+  intensity, time, experience, red flags) builds a routine shaped to *today*.
+- **“Why this routine?”** — every session explains its own reasoning in plain
+  language, so the personalization feels real and trustworthy.
+- **A premium, calm player** — one move at a time, with a timer, how it should
+  feel, a “stop if…” warning, prev/next controls, and hands-free read-aloud.
+- **Progress you can feel** — comfort before/after each session, mobility over
+  time, sessions and streaks, visualized with gentle charts.
+- **A recovery journal** — a soft daily check-in for body, mood, and energy,
+  because recovery is emotional too.
+- **Built for real bodies** — large text, high contrast, reduced motion,
+  read-aloud, big touch targets, keyboard navigation, and a light/dark theme.
 
+## Tech
 
-# **Prerequisites**
-A web browser.
-Internet connection.
+- **React + TypeScript + Vite**
+- **Tailwind CSS** for the design system (themeable via CSS variables)
+- **Framer Motion** for reduced-motion-aware animation
+- **Recharts** for progress visualizations
+- **Web Speech API** for read-aloud instructions
+- **Local-first** — everything is stored on-device in `localStorage`. No account,
+  no backend, no data leaves your browser.
 
-# **Usage**
-Create an Account: Sign up with your basic details.
-Fill Out the Form: Provide information about your fitness goals, areas of pain, and overall mobility.
-Receive Your Routine: Get a custom routine designed just for you.
-Follow Along: Use the provided videos and screenshots to correctly perform each exercise.
+## Run it
 
-# Contributing
-Contributions to improve EasePal are welcome. Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+```bash
+cd frontend
+npm install
+npm run dev      # http://localhost:5173
+```
 
+Build for production:
 
-# ![ezgif com-video-to-gif-converter (2)](https://github.com/joseph8071/EasePal/assets/93278644/9b8a53d5-68c1-47dc-90b2-4029dba16179)
+```bash
+npm run build    # outputs to frontend/dist
+npm run preview
+```
 
-# **Author**
-Joseph Alfartosy
+## Project structure
 
-# **License**
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+```
+frontend/src
+├─ lib/            # exercises, routine-matching engine, storage, types
+├─ context/        # SettingsContext (accessibility) + AppStateContext (progress/journal)
+├─ components/     # layout, UI primitives, accessibility panel, pose illustrations
+└─ pages/          # Landing, Safety, Onboarding, RoutinePreview, RoutinePlayer,
+                   # Progress, Journal, CaseStudy, NotFound
+```
 
+The routine engine (`src/lib/routines.ts`) is intentionally simple and fully
+transparent: it filters the curated exercise library by area and intensity,
+respects any red flags, bookends the session with breathing and rest, and packs
+movements to fit your time budget — then explains each choice back to you.
+
+> The earlier version was a MongoDB + OpenAI chat app. EasePal is now a
+> self-contained, offline-capable wellness companion. The legacy `backend/`
+> folder is kept for reference but is no longer required to run the app.
+
+## Safety
+
+EasePal does not diagnose or treat any condition. People with injuries or chronic
+conditions may need adjusted stretching techniques and should talk to a doctor or
+physiotherapist about any health concerns.
+
+## Author
+
+Joseph Alfartosy — [josephalfartosy.ca](https://josephalfartosy.ca)
+
+## License
+
+MIT — see [MIT-LICENCE](MIT-LICENCE).

@@ -1,39 +1,200 @@
-@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;800&family=Poppins:ital@1&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
+/* ---------------------------------------------------------------------------
+   Design tokens. Colors are space-separated RGB channels so Tailwind's
+   <alpha-value> and opacity utilities work (e.g. bg-brand/10).
+--------------------------------------------------------------------------- */
+:root {
+  --c-bg: 250 249 246; /* warm paper */
+  --c-surface: 255 255 255;
+  --c-surface-2: 246 244 240;
+  --c-ink: 28 43 41; /* deep slate-green */
+  --c-muted: 91 107 104;
+  --c-line: 230 226 219;
+  --c-brand: 18 133 119; /* calm teal */
+  --c-brand-soft: 224 243 240;
+  --c-brand-ink: 8 74 66;
+  --c-accent: 224 122 95; /* warm terracotta, used sparingly */
+  --c-accent-soft: 250 235 228;
+
+  --text-scale: 1;
+  --font-ui: "Inter", system-ui, sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --c-bg: 14 22 21;
+  --c-surface: 22 33 31;
+  --c-surface-2: 28 41 39;
+  --c-ink: 233 240 238;
+  --c-muted: 155 173 169;
+  --c-line: 41 56 53;
+  --c-brand: 45 190 168;
+  --c-brand-soft: 22 51 47;
+  --c-brand-ink: 190 235 227;
+  --c-accent: 238 150 122;
+  --c-accent-soft: 51 36 30;
+}
+
+/* High-contrast overrides layer on top of either theme. */
+:root[data-contrast="high"] {
+  --c-ink: 5 12 11;
+  --c-muted: 47 62 59;
+  --c-line: 120 132 129;
+  --c-brand: 8 92 80;
+  --c-brand-ink: 3 46 40;
+}
+:root[data-theme="dark"][data-contrast="high"] {
+  --c-ink: 255 255 255;
+  --c-muted: 205 219 216;
+  --c-line: 150 168 164;
+  --c-brand: 90 224 202;
+  --c-brand-ink: 220 250 244;
+}
+
+html {
+  font-size: calc(100% * var(--text-scale));
+  scroll-behavior: smooth;
+}
+:root[data-motion="reduced"] html {
+  scroll-behavior: auto;
+}
+
 body {
   margin: 0;
-  padding: 0;
-  background: #cce7ff;
-  color: white;
-  font-family: "Kanit", serif;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-ink));
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* .image-inverted {
-  filter: invert(100%);
-} */
-
-.nav-link {
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-right: 10px;
-  margin-left: 10px;
-  padding: 8px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  letter-spacing: 1px;
+/* Honor both the OS setting and the in-app reduced-motion toggle. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root[data-motion="reduced"] *,
+:root[data-motion="reduced"] *::before,
+:root[data-motion="reduced"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
 }
 
-.MuiOutlinedInput-input-root.Mui-focused,
-.MuiOutlinedInput-notchedOutline {
-  border-color: white !important;
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: "Fraunces", Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+  /* Visible focus for keyboard users everywhere. */
+  :focus-visible {
+    outline: 3px solid rgb(var(--c-brand));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: rgb(var(--c-brand) / 0.2);
+  }
 }
 
-.MuiSlider-markLabel {
-  color: white !important;
-  font-size: 20px !important;
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .card {
+    @apply rounded-3xl border border-line bg-surface shadow-soft;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-brand/30;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-surface-2 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted;
+  }
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white shadow-soft hover:shadow-lift hover:brightness-[1.05] active:brightness-95;
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-surface text-ink hover:bg-surface-2;
+  }
+  .btn-quiet {
+    @apply btn text-muted hover:bg-surface-2 hover:text-ink;
+  }
+  .link-underline {
+    @apply underline decoration-brand/40 underline-offset-4 hover:decoration-brand;
+  }
 }
 
-.MuiInputBase-input {
-  color: white !important;
+/* --------------------------- Pose demonstration motion --------------------
+   Subtle, slow loops that suggest each stretch. Applied only where a pose is
+   the focal point (the player, the hero). Percentage transform-origins need
+   transform-box: fill-box so they resolve against the figure's own box.
+--------------------------------------------------------------------------- */
+.pa-fig {
+  transform-box: fill-box;
+  will-change: transform;
+}
+.pa-breathe {
+  animation: pa-breathe 6s ease-in-out infinite;
+  transform-origin: 50% 55%;
+}
+.pa-tilt {
+  animation: pa-tilt 5s ease-in-out infinite;
+  transform-origin: 55% 82%;
+}
+.pa-reach {
+  animation: pa-reach 4.5s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+.pa-rock {
+  animation: pa-rock 5s ease-in-out infinite;
+  transform-origin: 50% 88%;
+}
+.pa-lean {
+  animation: pa-lean 5.5s ease-in-out infinite;
+  transform-origin: 50% 96%;
+}
+.pa-sway {
+  animation: pa-sway 6s ease-in-out infinite;
+  transform-origin: 50% 88%;
+}
+@keyframes pa-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+@keyframes pa-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-8deg); }
+}
+@keyframes pa-reach {
+  0%, 100% { transform: translateY(3px); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes pa-rock {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+@keyframes pa-lean {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(7deg); }
+}
+@keyframes pa-sway {
+  0%, 100% { transform: rotate(-3.5deg); }
+  50% { transform: rotate(3.5deg); }
+}
+
+/* Thin, calm scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--c-line)) transparent;
 }
