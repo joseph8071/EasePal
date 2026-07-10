@@ -72,8 +72,8 @@ respects any red flags, bookends the session with breathing and rest, and packs
 movements to fit your time budget — then explains each choice back to you.
 
 > The earlier version was a MongoDB + OpenAI chat app. EasePal is now a
-> self-contained, offline-capable wellness companion. The legacy `backend/`
-> folder is kept for reference but is no longer required to run the app.
+> self-contained, offline-capable wellness companion — the legacy backend has
+> been removed and no server is required to run it.
 
 ## Safety
 
