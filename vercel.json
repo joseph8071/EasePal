@@ -1,11 +1,6 @@
 {
-    "version": 2,
-    "name": "EasePal",
-    "buildCommand": "cd frontend && npm install && npm run build",
-    "outputDirectory": "frontend/dist",
-    "routes": [
-      { "src": "/(.*).(js|css|png|jpg|gif|svg|json|ico)$", "dest": "/$1.$2" },
-      { "src": "/(.*).html", "dest": "/$1.html" },
-      { "src": "/.*", "dest": "/index.html" }
-    ]
-  }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
